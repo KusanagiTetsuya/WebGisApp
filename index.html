@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+  <!-- BEGIN: Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
+    <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="PIXINVENT">
+    <title>WebGIS ARI</title>
+    <link rel="shortcut icon" type="image/x-icon" href="./app-assets/images/ico/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/elm-pep@1.0.6/dist/elm-pep.js"></script>
+    <script src="https://cdn.polyfill.io/v3/polyfill.min.js?features=fetch,requestAnimationFrame,Element.prototype.classList,TextDecoder"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/3.18.3/minified.js"></script>
+    <script type="module">
+      import Geohash from 'https://cdn.jsdelivr.net/npm/latlon-geohash@2.0.0';
+  
+      const geohash = Geohash.encode(52.20, 0.12, 6);
+      console.assert(geohash == 'u120fw');
+  
+      const latlon = Geohash.decode('u120fw');
+      console.assert(JSON.stringify(latlon) == '{"lat":52.1988,"lon":0.115}');
+    </script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/diootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script> -->
+    <link href="./Style/Style.css" rel="stylesheet" type="text/css">
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="./app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="./app-assets/vendors/css/charts/apexcharts.css">
+    <link rel="stylesheet" type="text/css" href="./app-assets/vendors/css/extensions/toastr.min.css">
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="./app-assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./app-assets/css/bootstrap-extended.min.css">
+    <link rel="stylesheet" type="text/css" href="./app-assets/css/colors.min.css">
+    <link rel="stylesheet" type="text/css" href="./app-assets/css/components.min.css">
+    <link rel="stylesheet" type="text/css" href="./app-assets/css/themes/dark-layout.min.css">
+    <link rel="stylesheet" type="text/css" href="./app-assets/css/themes/bordered-layout.min.css">
+    <link rel="stylesheet" type="text/css" href="./app-assets/css/themes/semi-dark-layout.min.css">
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="./app-assets/css/core/menu/menu-types/vertical-menu.min.css">
+    <link rel="stylesheet" type="text/css" href="./app-assets/css/pages/dashboard-ecommerce.min.css">
+    <link rel="stylesheet" type="text/css" href="./app-assets/css/plugins/charts/chart-apex.min.css">
+    <link rel="stylesheet" type="text/css" href="./app-assets/css/plugins/extensions/ext-component-toastr.min.css">
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <!-- END: Custom CSS-->
+    
+    <style>
+      body {
+        overflow: hidden; /* Hide scrollbars */
+      }
+    </style>
+
+  </head>
+  <!-- END: Head-->
+
+  <!-- BEGIN: Body-->
+  <body class="vertical-layout vertical-menu-modern  navbar-floating footer-static   menu-collapsed" data-open="click" data-menu="vertical-menu-modern" data-col="">
+
+    <!-- BEGIN: Header-->
+    <nav class="header-navbar navbar navbar-expand-lg align-items-center navbar-light navbar-shadow container-xxl">
+      <div class="navbar-container d-flex content">
+        <div class="bookmark-wrapper d-flex align-items-center">
+          <ul class="nav navbar-nav d-xl-none">
+            <li class="nav-item"><a class="nav-link menu-toggle" href="javascript:void(0);"><i class="ficon" data-feather="menu"></i></a></li>
+          </ul>
+          <a class="navbar-brand" href="#">Web Mapping App</a>
+          <!-- <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="#"><span class="badge badge-info" id="layers">Layers</span><span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><span class="badge badge-info" id="measure">Measure</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="coordinates"></a>
+            </li>
+          </ul> -->
+          <!-- Delete to show coordinates
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="coordinates"></a>
+          </li>
+          -->
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Parcel Number" id="parcelInput" aria-label="Search">
+            <input class="form-control mr-sm-2" type="search" placeholder="Block Number" id="blockInput" aria-label="Search">
+            <button class="btn btn-success my-2 my-sm-0" type="button" id="search">Search</button>
+          </form>
+
+        </div>
+        <ul class="nav navbar-nav align-items-center ml-auto">
+          <li class="nav-item dropdown dropdown-notification mr-25"><a class="nav-link" href="javascript:void(0);" data-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell ficon"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg><span class="badge badge-pill badge-danger badge-up">6</span></a>
+            <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+              <li class="dropdown-menu-header">
+                <div class="dropdown-header d-flex">
+                  <h4 class="notification-title mb-0 mr-auto">Notifications</h4>
+                  <div class="badge badge-pill badge-light-primary">6 New</div>
+                </div>
+              </li>
+              <li class="scrollable-container media-list"><a class="d-flex" href="javascript:void(0)">
+                  <div class="media d-flex align-items-start">
+                    <div class="media-left">
+                      <div class="avatar"><img src="./app-assets/images/portrait/small/avatar-s-15.jpg" alt="avatar" width="32" height="32"></div>
+                    </div>
+                    <div class="media-body">
+                      <p class="media-heading"><span class="font-weight-bolder">Congratulation Sam 🎉</span>winner!</p><small class="notification-text"> Won the monthly best seller badge.</small>
+                    </div>
+                  </div></a><a class="d-flex" href="javascript:void(0)">
+                  <div class="media d-flex align-items-start">
+                    <div class="media-left">
+                      <div class="avatar"><img src="./app-assets/images/portrait/small/avatar-s-3.jpg" alt="avatar" width="32" height="32"></div>
+                    </div>
+                    <div class="media-body">
+                      <p class="media-heading"><span class="font-weight-bolder">New message</span>&nbsp;received</p><small class="notification-text"> You have 10 unread messages</small>
+                    </div>
+                  </div></a><a class="d-flex" href="javascript:void(0)">
+                  <div class="media d-flex align-items-start">
+                    <div class="media-left">
+                      <div class="avatar bg-light-danger">
+                        <div class="avatar-content">MD</div>
+                      </div>
+                    </div>
+                    <div class="media-body">
+                      <p class="media-heading"><span class="font-weight-bolder">Revised Order 👋</span>&nbsp;checkout</p><small class="notification-text"> MD Inc. order updated</small>
+                    </div>
+                  </div></a>
+                
+              </li>
+              <li class="dropdown-menu-footer"><a class="btn btn-primary btn-block" href="javascript:void(0)">Read all notifications</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown dropdown-user">
+            <a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div class="user-nav d-sm-flex d-none">
+                <span class="user-name font-weight-bolder">John Doe</span>
+                <span class="user-status">Admin</span>
+              </div>
+              <span class="avatar">
+                <img class="round" src="./app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40">
+                <span class="avatar-status-online"></span>
+              </span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user">
+              <a class="dropdown-item" ><i class="mr-50" data-feather="user"></i> Main screen</a>
+              <a class="dropdown-item" ><i class="mr-50" data-feather="mail"></i> Official screen</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" ><i class="mr-50" data-feather="user"></i> Profile</a>
+              <a class="dropdown-item" ><i class="mr-50" data-feather="message-square"></i> Help</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item"><i class="mr-50" data-feather="power"></i> Logout</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    
+    <ul class="main-search-list-defaultlist d-none">
+      <li class="d-flex align-items-center"><a href="javascript:void(0);">
+          <h6 class="section-label mt-75 mb-0">Files</h6></a></li>
+      <li class="auto-suggestion"><a class="d-flex align-items-center justify-content-between w-100" >
+          <div class="d-flex">
+            <div class="mr-75"><img src="./app-assets/images/icons/xls.png" alt="png" height="32"></div>
+            <div class="search-data">
+              <p class="search-data-title mb-0">Two new item submitted</p><small class="text-muted">Marketing Manager</small>
+            </div>
+          </div><small class="search-data-size mr-50 text-muted">&apos;17kb</small></a></li>
+      <li class="auto-suggestion"><a class="d-flex align-items-center justify-content-between w-100" >
+          <div class="d-flex">
+            <div class="mr-75"><img src="./app-assets/images/icons/jpg.png" alt="png" height="32"></div>
+            <div class="search-data">
+              <p class="search-data-title mb-0">52 JPG file Generated</p><small class="text-muted">FontEnd Developer</small>
+            </div>
+          </div><small class="search-data-size mr-50 text-muted">&apos;11kb</small></a></li>
+      <li class="auto-suggestion"><a class="d-flex align-items-center justify-content-between w-100" >
+          <div class="d-flex">
+            <div class="mr-75"><img src="./app-assets/images/icons/pdf.png" alt="png" height="32"></div>
+            <div class="search-data">
+              <p class="search-data-title mb-0">25 PDF File Uploaded</p><small class="text-muted">Digital Marketing Manager</small>
+            </div>
+          </div><small class="search-data-size mr-50 text-muted">&apos;150kb</small></a></li>
+      <li class="auto-suggestion"><a class="d-flex align-items-center justify-content-between w-100" >
+          <div class="d-flex">
+            <div class="mr-75"><img src="./app-assets/images/icons/doc.png" alt="png" height="32"></div>
+            <div class="search-data">
+              <p class="search-data-title mb-0">Anna_Strong.doc</p><small class="text-muted">Web Designer</small>
+            </div>
+          </div><small class="search-data-size mr-50 text-muted">&apos;256kb</small></a></li>
+      <li class="d-flex align-items-center"><a href="javascript:void(0);">
+          <h6 class="section-label mt-75 mb-0">Members</h6></a></li>
+      <li class="auto-suggestion"><a class="d-flex align-items-center justify-content-between py-50 w-100" >
+          <div class="d-flex align-items-center">
+            <div class="avatar mr-75"><img src="./app-assets/images/portrait/small/avatar-s-8.jpg" alt="png" height="32"></div>
+            <div class="search-data">
+              <p class="search-data-title mb-0">John Doe</p><small class="text-muted">UI designer</small>
+            </div>
+          </div></a></li>
+      <li class="auto-suggestion"><a class="d-flex align-items-center justify-content-between py-50 w-100" >
+          <div class="d-flex align-items-center">
+            <div class="avatar mr-75"><img src="./app-assets/images/portrait/small/avatar-s-1.jpg" alt="png" height="32"></div>
+            <div class="search-data">
+              <p class="search-data-title mb-0">Michal Clark</p><small class="text-muted">FontEnd Developer</small>
+            </div>
+          </div></a></li>
+      <li class="auto-suggestion"><a class="d-flex align-items-center justify-content-between py-50 w-100">
+          <div class="d-flex align-items-center">
+            <div class="avatar mr-75"><img src="./app-assets/images/portrait/small/avatar-s-14.jpg" alt="png" height="32"></div>
+            <div class="search-data">
+              <p class="search-data-title mb-0">Milena Gibson</p><small class="text-muted">Digital Marketing Manager</small>
+            </div>
+          </div></a></li>
+      <li class="auto-suggestion"><a class="d-flex align-items-center justify-content-between py-50 w-100" >
+          <div class="d-flex align-items-center">
+            <div class="avatar mr-75"><img src="./app-assets/images/portrait/small/avatar-s-6.jpg" alt="png" height="32"></div>
+            <div class="search-data">
+              <p class="search-data-title mb-0">Anna Strong</p><small class="text-muted">Web Designer</small>
+            </div>
+          </div></a></li>
+    </ul>
+    <ul class="main-search-list-defaultlist-other-list d-none">
+      <li class="auto-suggestion justify-content-between"><a class="d-flex align-items-center justify-content-between w-100 py-50">
+          <div class="d-flex justify-content-start"><span class="mr-75" data-feather="alert-circle"></span><span>No results found.</span></div></a></li>
+    </ul>
+    <!-- END: Header-->
+    
+
+    <!-- Map Div-->
+  <div id="map"></div>
+
+  <!-- Draggable DIV -->
+  <div id="draggable">
+    <div id="draggable-header"><div id="draggable-title">Title</div><a href="#" id="draggable-closer" class="ol-popup-closer"></a></div>
+    <div id="draggable-content">
+      <p>Move</p>
+      <p>this</p>
+      <p>DIV</p>
+    </div>
+  </div> 
+
+  <!-- Popup Div -->
+  <div id="popup" class="ol-popup">
+    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+    <div id="popup-content">
+      <div id="parcel-info"></div>
+      <div id="building-info"></div>
+      <div id="select-coordinate"></div>
+      <div id="no-features"></div>
+    </div>
+    
+  </div>
+
+    <!-- BEGIN: Customizer-->
+    <div class="customizer d-none d-md-block" >
+      <a class="customizer-toggle d-flex align-items-center justify-content-center" id="main-menu-toggle" href="javascript:void(0);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map shake">
+          <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+          <line x1="8" y1="2" x2="8" y2="18"></line>
+          <line x1="16" y1="6" x2="16" y2="22"></line>
+        </svg>
+      </a>
+        <!-- Customizer header -->
+        <div class="customizer-header px-2 pt-1 pb-0 position-relative">
+          <h4 class="mb-0">ASIA RESEARCH INSTITUTE</h4>
+          <p class="m-0">Main menu</p>
+          <a class="customizer-close" href="javascript:void(0);"><i data-feather="x"></i></a>
+        </div>
+        <hr />
+
+        <!-- Menu -->
+        <div class="customizer-menu px-2">
+          <div id="customizer-menu-collapsible" class="d-flex">
+            <p class="font-weight-bold mr-auto m-0" id="switch-desc">Area / Facility list</p>
+            <div class="custom-control custom-control-primary custom-switch">
+              <!-- <input type="checkbox" class="custom-control-input" id="collapse-sidebar-switch" />
+              <label class="custom-control-label" for="collapse-sidebar-switch"></label> -->
+              <label class="switch">
+                <input type="checkbox" id='main-menu-switch'checked>
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <hr />
+        
+        <div class="tab-button-outer">
+          <ul id="tab-button">
+            <li><a href="#tab01">Area</a></li>
+            <li><a href="#tab02">Facility</a></li>
+          </ul>
+        </div>
+        <div class="tab-select-outer">
+          <select id="tab-select">
+            <option value="#tab01">Area</option>
+            <option value="#tab02">Facility</option>
+          </select>
+        </div>
+
+        <div id="tab01" class="tab-contents">
+          <!-- <h2>Area</h2> -->
+          <div class="container h-100">
+            <div class="d-flex justify-content-center h-100">
+              <div class="searchbar">
+                <input class="search_input" type="text" name="" placeholder="Search...">
+                <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+              </div>
+            </div>
+          </div>
+          <hr/>
+  
+          <div class="d-flex mx-0 py-0">
+            <button type="button" class="btn btn-sm btn-success" id="select-btn">Select All</button>
+            <button type="button" class="btn btn-sm btn-success" style="display: none;" id="unselect-btn">Unselect All</button>
+            <button type="button" class="btn btn-outline-secondary btn-sm ml-1" disabled="disabled" id="group-btn">Group Editing</button>
+            <div class="upload-btn-wrapper">
+              <button class="btn btn-warning btn-sm ml-1">Import</button>
+              <input type="file" name="myfile" />
+            </div>
+          </div>
+          <hr/>
+          <li id="area-list">
+            <!-- <p>Steven Wilson</p> -->
+            <input id="area-1" type="checkbox"/>
+            <label for="area-1"><i class="fa fa-check"><p>Area1</p></i></label>
+          </li>
+          <li id="area-list">
+            <!-- <p>Jamie Harden</p> -->
+            <input id="area-2" type="checkbox"/>
+            <label for="area-2"><i class="fa fa-check"><p>Area2</p></i></label>
+          </li>
+          <li id="area-list">
+            <!-- <p>Mike Portnoy</p> -->
+            <input id="area-3" type="checkbox"/>
+            <label for="area-3"><i class="fa fa-check"><p>Area3</p></i></label>
+          </li>
+            
+         </div>
+        <div id="tab02" class="tab-contents">
+          <!-- <h2>Facility</h2> -->
+          <div class="container h-100">
+            <div class="d-flex justify-content-center h-100">
+              <div class="searchbar">
+                <input class="search_input" type="text" name="" placeholder="Search...">
+                <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+              </div>
+            </div>
+            
+          </div>
+          <hr/>
+          <div class="d-flex mx-0 py-0">
+            <button type="button" class="btn btn-sm btn-primary" id="select-btn">Select All</button>
+            <button type="button" class="btn btn-sm btn-success" style="display: none;" id="unselect-btn">Unselect All</button>
+            <button type="button" class="btn btn-outline-secondary btn-sm ml-1" disabled="disabled" id="group-btn">Group Editing</button>
+            <div class="upload-btn-wrapper">
+              <button class="btn btn-warning btn-sm ml-1">Import</button>
+              <input type="file" name="myfile" />
+            </div>
+          </div>
+          <hr/>
+          <li id="facility-list">
+            <!-- <p>Steven Wilson</p> -->
+            <input id="facility-1" type="checkbox"/>
+            <label for="facility-1"><i class="fa fa-check"><p>Facility1</p></i></label>
+          </li>
+          <li id="facility-list">
+            <!-- <p>Jamie Harden</p> -->
+            <input id="facility-2" type="checkbox"/>
+            <label for="facility-2"><i class="fa fa-check"><p>Facility2</p></i></label>
+          </li>
+          <li id="facility-list">
+            <!-- <p>Mike Portnoy</p> -->
+            <input id="facility-3" type="checkbox"/>
+            <label for="facility-3"><i class="fa fa-check"><p>Facility3</p></i></label>
+          </li>
+          
+        </div>
+
+      </div>
+
+    </div>
+    <!-- End: Customizer-->
+
+    <style>
+      .customizer .customizer-toggle2 {
+      background: #f0b967;
+      color: #fff !important;
+      display: block;
+      box-shadow: -3px 0px 8px rgba(34, 41, 47, 0.1);
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+      position: absolute;
+      top: 45%;
+      width: 38px;
+      height: 38px;
+      left: -39px;
+      text-align: center;
+      line-height: 40px;
+      cursor: pointer; }
+    </style>
+
+    <!-- Buynow Button-->
+    <div class="adds-function">
+      <div class="add-area">
+        <a id="add-area-btn" target="_blank" class="btn btn-danger btn-lg" value="Point">Add Area</a>
+      </div>
+      <div class="add-facility">
+        <a id="add-facility-btn" target="_blank" class="btn btn-warning btn-lg" >Add Facility</a>
+      </div>
+      
+    </div>
+
+    
+
+    <!-- BEGIN: Footer-->
+    <footer class="footer footer-static footer-light">
+      <p class="clearfix"><span class="float-md-right d-block d-md-inline-block mt-25">COPYRIGHT  &copy; 2022<a class="ml-25" href="https://asiaresearchinstitute.com" target="_blank">Asia Research Institute</a><span class="d-none d-sm-inline-block">, All rights Reserved</span></span></p>
+    </footer>
+    <!-- <button class="btn btn-primary btn-icon scroll-top" type="button"><i data-feather="arrow-up"></i></button> -->
+    <!-- END: Footer-->
+
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="./app-assets/vendors/js/vendors.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="./app-assets/vendors/js/charts/apexcharts.min.js"></script>
+    <script src="./app-assets/vendors/js/extensions/toastr.min.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="./app-assets/js/core/app-menu.min.js"></script>
+    <!-- <script src="./app-assets/js/core/app.js"></script> -->
+    <script src="./app-assets/js/scripts/customizer.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <!-- <script src="./app-assets/js/scripts/pages/dashboard-ecommerce.min.js"></script> -->
+    <!-- END: Page JS-->
+
+    <!-- <script>
+      $(window).on('load',  function(){
+        if (feather) {
+          feather.replace({ width: 14, height: 14 });
+        }
+      })
+    </script> -->
+    <!-- <script src="./scripts/DBConnection.js"></script> -->
+    <!-- <script src="./scripts/pool.js"></script> -->
+    <script src="./scripts/Map.js"></script>
+    <!-- <script src="scripts/Identify.js"></script> -->
+    <script src="scripts/Marker.js"></script>
+    <script src="scripts/Layers.js"></script>
+    <script src="scripts/Measure.js"></script>
+    <script src="scripts/Search.js"></script>
+    <script src="scripts/MainMenu.js"></script>
+    <script src="scripts/TabPanels.js"></script>
+    <script src="scripts/AddArea.js"></script>
+    <script src="scripts/AddFacility.js"></script>
+    <!-- <script src="./app.js"></script> -->
+    <!-- Delete comment to show coordinates
+    <script src="scripts/Coordinates.js"></script>
+    -->
+  </body>
+  <!-- END: Body-->
+</html>
